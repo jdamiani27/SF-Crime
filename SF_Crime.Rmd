@@ -1,0 +1,56 @@
+---
+title: "Project"
+author: "Jason Damiani"
+date: "June 28, 2015"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+sfc <- read.csv('train.csv')
+dim(sfc)
+names(sfc)
+str(sfc)
+
+sfc$DayOfWeek <- factor(sfc$DayOfWeek, levels=c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"), ordered = TRUE)
+
+sfc$Dates.POSIX <- as.POSIXct(sfc$Dates, tz="America/Los_Angeles", format = "%Y-%m-%d %H:%M:%S")
+
+str(sfc)
+
+summary(sfc)
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+library(ggplot2)
+
+p <- ggplot(sfc, aes(x = Dates.POSIX)) +
+  geom_histogram()
+
+print(p)
+
+p <- ggplot(sfc, aes(x = DayOfWeek)) +
+  geom_histogram()
+
+print(p)
+
+p <- ggplot(sfc, aes(x = X, y = Y)) +
+  geom_point()
+
+print(p)
+
+max(sfc$X)
+max(sfc$Y)
+
+p <- ggplot(subset(sfc, X < -120.5 & Y < 90), aes(x = X, y = Y)) +
+  geom_point(alpha = 0.1)
+
+print(p)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
