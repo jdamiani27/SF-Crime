@@ -1,4 +1,4 @@
-TITLE by YOUR_NAME_HERE
+San Francisco Crime Classification by Jason Damiani
 ========================================================
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, packages}
