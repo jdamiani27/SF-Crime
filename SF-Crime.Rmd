@@ -14,7 +14,7 @@ library(ggplot2)
 
 ```{r echo=FALSE, Load_the_Data}
 # Load the Data
-sfc <- read.csv('train.csv')
+sfc <- read.csv('Data/train.csv')
 dim(sfc)
 names(sfc)
 str(sfc)
@@ -23,40 +23,46 @@ sfc$DayOfWeek <- factor(sfc$DayOfWeek, levels=c("Monday", "Tuesday", "Wednesday"
 
 sfc$Dates.POSIX <- as.POSIXct(sfc$Dates, tz="America/Los_Angeles", format = "%Y-%m-%d %H:%M:%S")
 
+
+
 str(sfc)
 
 summary(sfc)
+
+
+
 ```
 
 # Univariate Plots Section
 ```{r echo=FALSE, Univariate_Plots}
-p <- ggplot(sfc, aes(x = Dates.POSIX)) +
+ggplot(sfc, aes(x = Dates.POSIX)) +
   geom_histogram()
 
-print(p)
-
-p <- ggplot(sfc, aes(x = DayOfWeek)) +
+ggplot(sfc, aes(x = DayOfWeek)) +
   geom_histogram()
 
-print(p)
-
-p <- ggplot(sfc, aes(x = X, y = Y)) +
+ggplot(sfc, aes(x = X, y = Y)) +
   geom_point()
 
-print(p)
 
 max(sfc$X)
 max(sfc$Y)
 
-p <- ggplot(subset(sfc, X < -120.5 & Y < 90), aes(x = X, y = Y)) +
+ggplot(subset(sfc, X < -120.5 & Y < 90), aes(x = X, y = Y)) +
   geom_point(alpha = 0.1)
 
-print(p)
-
-p <- ggplot(subset(sfc, X < -120.5 & Y < 90), aes(x = X, y = Y, color = Category)) +
+ggplot(subset(sfc, X < -120.5 & Y < 90), aes(x = X, y = Y, color = Category)) +
   geom_point(alpha = 0.1)
 
-print(p)
+ggplot(sfc, aes(x = PdDistrict)) +
+  geom_bar()
+
+ggplot(sfc, aes(x = PdDistrict, fill = Category)) +
+  geom_bar()
+
+ggplot(sfc, aes(x = PdDistrict)) +
+  geom_bar() +
+  facet_wrap(~Category)
 ```
 
 # Univariate Analysis
