@@ -29,7 +29,9 @@ str(sfc)
 
 summary(sfc)
 
+levels(sfc$Category)
 
+sfc[sfc$Category=="TREA", c("Category","Descript")]
 
 ```
 
